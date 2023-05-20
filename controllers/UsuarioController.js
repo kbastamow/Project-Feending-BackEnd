@@ -1,9 +1,19 @@
 const Usuario = require("../models/Usuario");
+const bcrypt = require ('bcryptjs');
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/keys.js");
 
 const UsuarioController = {
+    
   async create(req, res) {
+    req.body.role = "usuario";
+    const password = req.body.password;
+    let hashedPassword;
+    if (password) {
+      hashedPassword = bcrypt.hashSync(password, 10); ///encriptando clave de acceso
+    }
     try {
-      const usuario = await Usuario.create(req.body);
+      const usuario = await Usuario.create({ ...req.body, password: hashedPassword });
       res.status(201).send({ message: "Usuario creado con éxito", usuario });
     } catch (error) {
       console.error(error);
@@ -12,6 +22,30 @@ const UsuarioController = {
         .send({ message: "Ha habido un problema al crear el usuario" });
     }
   },
+
+  async login(req, res) {
+    try {
+      const usuario = await Usuario.findOne({
+        email: req.body.email,
+      });
+      if (!usuario) {
+        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
+      }
+      const isMatch = await bcrypt.compare(req.body.password, usuario.password);
+      if (!isMatch) {
+        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
+      }
+      const token = jwt.sign({ _id: usuario._id }, jwt_secret);
+      if (usuario.tokens.length > 4) usuario.tokens.shift;
+      usuario.tokens.push(token);
+      await usuario.save();
+      res.send({ msg: "Bienvenid@ " + usuario.nombre, token});
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ msg: "Ha habido un error al logearte", error });
+    }
+  },
+
 
   async getAll(req, res) {
     try {
@@ -54,7 +88,6 @@ const UsuarioController = {
     } catch (error) {
       console.error(error);
     }
-  }
-
+  },
 };
 module.exports = UsuarioController;

@@ -7,6 +7,7 @@ const UsuarioSchema = new mongoose.Schema({
     role: String,
     puesto: String,
     imagen: String, //multer
+    tokens: [],
 
   }, { timestamps: true }
 );
