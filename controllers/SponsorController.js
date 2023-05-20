@@ -40,7 +40,21 @@ const SponsorController = {
       console.error(error)
       res.status(500).send({ message: 'Ha habido un problema al eliminar el sponsor'})
     }
+  },
+
+  async update(req, res) {
+    try {
+      const sponsor = await Sponsor.findByIdAndUpdate(
+        req.params._id,
+        req.body,
+        { new: true }
+      );
+      res.send({ message: "Sponsor actualizado con éxito", sponsor });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 };
+
 module.exports = SponsorController;

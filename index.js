@@ -8,5 +8,6 @@ app.use(express.json());
 dbConnection();
 
 app.use('/usuarios', require('./routes/usuarios'));
+app.use('/sponsors', require('./routes/sponsors'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
