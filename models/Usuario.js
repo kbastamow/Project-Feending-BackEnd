@@ -6,12 +6,11 @@ const UsuarioSchema = new mongoose.Schema({
     password: String,
     role: String,
     puesto: String,
-    imagen: String,
-    comentarios: Array
+    imagen: String, //multer
 
   }, { timestamps: true }
 );
 
-const Product = mongoose.model("Product", ProductSchema);
+const Usuario = mongoose.model("Usuario", UsuarioSchema);
 
-module.exports = Product;
+module.exports = Usuario;

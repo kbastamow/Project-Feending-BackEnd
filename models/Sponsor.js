@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const SponsorSchema = new mongoose.Schema({
     nombre: String,                             
-    imagen: String,
+    imagen: String, //multer
    
   }, { timestamps: true }
 );
 
-const Product = mongoose.model("Product", ProductSchema);
+const Sponsor = mongoose.model("Sponsor", SponsorSchema);
 
-module.exports = Product;
+module.exports = Sponsor;
