@@ -30,5 +30,16 @@ const UsuarioController = {
       console.error(error);
     }
   },
+
+  async delete(req, res) {
+    try {
+      const usuario = await Usuario.findByIdAndDelete(req.params._id)
+      res.send({ usuario, message: 'Eliminado' })
+    } catch (error) {
+      console.error(error)
+      res.status(500).send({ message: 'Ha habido un problema al eliminar el usuario'})
+    }
+  }
+
 };
 module.exports = UsuarioController;

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router()
-const UsuarioController = require('../controllers/UsuarioController');
+const SponsorController = require('../controllers/SponsorController');
 
-router.post('/create',UsuarioController.create)
+router.post('/create',SponsorController.create)
 router.get('/getAllUsers',UsuarioController.getAll)
 router.get('/getById/:_id',UsuarioController.getById)
 router.delete('/delete/:_id',UsuarioController.delete)
