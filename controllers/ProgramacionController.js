@@ -1,4 +1,4 @@
-const Evento = require("../models/Programacion");
+const Programacion = require("../models/Programacion");
 
 const ProgramacionController = {
     
@@ -16,7 +16,7 @@ const ProgramacionController = {
 
   async getAll(req, res) {
     try {
-      const programaciones = await EProgramacion.find();
+      const programaciones = await Programacion.find();
       res.send({ message: "Programaciones mostradas con exito", programaciones });
     } catch (error) {
       console.error(error);
