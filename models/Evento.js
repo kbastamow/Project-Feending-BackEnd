@@ -16,6 +16,6 @@ const EventoSchema = new mongoose.Schema({
   }, { timestamps: true }
 );
 
-const Sponsor = mongoose.model("Evento", EventoSchema);
+const Evento = mongoose.model("Evento", EventoSchema);
 
 module.exports = Evento;

@@ -5,12 +5,12 @@ const ProgramacionController = {
   async create(req, res) {
     try {
       const programacion = await Programacion.create(req.body);
-      res.status(201).send({ message:  "Programacion creada con exito", programacion });
+      res.status(201).send({ message:  "Programación creada con exito", programacion });
     } catch (error) {
       console.error(error);
       res
         .status(500)
-        .send({ message: "Ha habido un problema al crear la programacion" });
+        .send({ message: "Ha habido un problema al crear la programación" });
     }
   },
 
@@ -26,7 +26,7 @@ const ProgramacionController = {
   async getById(req, res) {
     try {
       const programacion = await Programacion.findById(req.params._id);
-      res.send({ message: 'Programacion por ID mostrada con exito', programacion});
+      res.send({ message: 'Programación por ID mostrada con exito', programacion});
     } catch (error) {
       console.error(error);
     }

@@ -13,7 +13,6 @@ const EventoController = {
         .send({ message: "Ha habido un problema al crear el evento" });
     }
   },
-
   async update(req, res) {
     try {
       const evento = await Evento.findByIdAndUpdate(

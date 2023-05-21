@@ -9,6 +9,6 @@ const ProgramacionSchema = new mongoose.Schema({
   }, { timestamps: true }
 );
 
-const Sponsor = mongoose.model("Programacion", ProgramacionSchema);
+const Programacion = mongoose.model("Programacion", ProgramacionSchema);
 
 module.exports = Programacion;
