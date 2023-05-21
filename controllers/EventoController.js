@@ -1,4 +1,4 @@
-const Evento = require("../models Evento");
+const Evento = require("../models/Evento");
 
 const EventoController = {
     
@@ -11,34 +11,6 @@ const EventoController = {
       res
         .status(500)
         .send({ message: "Ha habido un problema al crear el evento" });
-    }
-  },
-
-  async getAll(req, res) {
-    try {
-      const eventos = await Evento.find();
-      res.send({ message: "Eventos mostrados con exito", eventos });
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
-  async getById(req, res) {
-    try {
-      const evento = await Evento.findById(req.params._id);
-      res.send({ message: 'Evento por ID mostrado con exito', evento});
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
-  async delete(req, res) {
-    try {
-      const evento = await Evento.findByIdAndDelete(req.params._id)
-      res.send({ evento, message: 'Eliminado' })
-    } catch (error) {
-      console.error(error)
-      res.status(500).send({ message: 'Ha habido un problema al eliminar el evento'})
     }
   },
 
