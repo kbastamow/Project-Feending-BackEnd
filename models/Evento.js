@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 
 const EventoSchema = new mongoose.Schema({
-    dia: Number,
-    actividad: String, 
-    inicio: Date,
-    fin: Date
-  
+    nombre: String,
+    descripcion: String,
+    finicio: Date,
+    ffin: Date,
+    hinicio: Date,
+    hfin: Date,
+    direccion: {
+        calle: String,
+        localidad: String,
+        provincia: String
+    },
+    econfirm:  { type: Boolean, default: false },
   }, { timestamps: true }
 );
 

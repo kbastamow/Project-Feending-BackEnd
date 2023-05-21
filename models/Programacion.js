@@ -1,17 +1,10 @@
 const mongoose = require("mongoose");
 
 const ProgramacionSchema = new mongoose.Schema({
-    dia: Number ,
-    finicio: Date,
-    ffin: Date,
-    hinicio: Date,
-    hfin: Date,
-    direccion: {
-        calle: String,
-        localidad: String,
-        provincia: String
-    },
-    econfirm: Boolean
+  dia: Number,
+  actividad: String, 
+  inicio: Date,
+  fin: Date
 
   }, { timestamps: true }
 );
