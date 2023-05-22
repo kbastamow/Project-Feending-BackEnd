@@ -6,6 +6,10 @@ const UsuarioSchema = new mongoose.Schema(
       type: String,
       required: [true, "Por favor rellena tu nombre"],
     },
+    categoria: {
+      type: String,
+      required: [true, "Por favor indica la categoría a la que pertenece"],
+    },
     email: {
       type: String,
       match: [/.+\@.+\..+/, "Este correo no es válido"],
