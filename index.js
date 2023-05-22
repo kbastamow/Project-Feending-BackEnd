@@ -1,14 +1,18 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const PORT = 8080;
+const cors = require('cors')
 
+const { dbConnection } = require('./config/config');
+const { handleTypeError } = require('./middlewares/errors');
 
-const { dbConnection } = require("./config/config");
-
+app.use(cors())
 app.use(express.json());
 app.use(express.static("./uploads"))
 
 dbConnection();
+
+app.use(handleTypeError)
 
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/sponsors', require('./routes/sponsors'));

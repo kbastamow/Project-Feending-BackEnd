@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/keys.js");
 
 const UsuarioController = {
-  async create(req, res, next) {
+  async create(req, res) {
     req.body.role = "usuario";
     const password = req.body.password;
     let hashedPassword;
@@ -20,10 +20,6 @@ const UsuarioController = {
       res.status(201).send({ message: "Usuario creado con éxito", usuario });
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({ message: "Ha habido un problema al crear el usuario" });
-        next()
     }
   },
 
