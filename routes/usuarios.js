@@ -4,7 +4,7 @@ const UsuarioController = require('../controllers/UsuarioController');
 const { authentication } = require("../middlewares/authentication");
 const upload = require('../middlewares/multer'); 
 
-router.post('/create',upload.single('img'),UsuarioController.create)
+router.post('/create',upload.single('imagen'),UsuarioController.create)
 router.get('/getAllUsers',UsuarioController.getAll)
 router.get('/getById/:_id',UsuarioController.getById)
 router.delete('/delete/:_id',authentication,UsuarioController.delete)

@@ -14,6 +14,7 @@ const UsuarioController = {
     try {
       const usuario = await Usuario.create({
         ...req.body,
+        imagen: req.file.filename ,
         password: hashedPassword,
       });
       res.status(201).send({ message: "Usuario creado con éxito", usuario });
