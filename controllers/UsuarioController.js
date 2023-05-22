@@ -4,8 +4,7 @@ const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/keys.js");
 
 const UsuarioController = {
-    
-  async create(req, res) {
+  async create(req, res, next) {
     req.body.role = "usuario";
     const password = req.body.password;
     let hashedPassword;
@@ -13,13 +12,17 @@ const UsuarioController = {
       hashedPassword = bcrypt.hashSync(password, 10); ///encriptando clave de acceso
     }
     try {
-      const usuario = await Usuario.create({ ...req.body, password: hashedPassword });
+      const usuario = await Usuario.create({
+        ...req.body,
+        password: hashedPassword,
+      });
       res.status(201).send({ message: "Usuario creado con éxito", usuario });
     } catch (error) {
       console.error(error);
       res
         .status(500)
         .send({ message: "Ha habido un problema al crear el usuario" });
+        next()
     }
   },
 
@@ -39,13 +42,12 @@ const UsuarioController = {
       if (usuario.tokens.length > 4) usuario.tokens.shift;
       usuario.tokens.push(token);
       await usuario.save();
-      res.send({ msg: "Bienvenid@ " + usuario.nombre, token});
+      res.send({ msg: "Bienvenid@ " + usuario.nombre, token });
     } catch (error) {
       console.error(error);
-      res.status(500).send({ msg: "Ha habido un error al logearte", error });
+      res.status(500).send({ msg: "Ha habido un error al loguearte", error });
     }
   },
-
 
   async getAll(req, res) {
     try {
@@ -87,6 +89,22 @@ const UsuarioController = {
       res.send({ message: "Usuario actualizado con éxito", usuario });
     } catch (error) {
       console.error(error);
+    }
+  },
+
+  async logout(req, res) {
+    try {
+      await Usuario.findByIdAndUpdate(req.usuario._id, {
+        $pull: { tokens: req.headers.authorization },
+      });
+
+      res.send({ message: "Desconectado con éxito" });
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).send({
+        message: "Hubo un problema al intentar desconectar al usuario",
+      });
     }
   },
 };
