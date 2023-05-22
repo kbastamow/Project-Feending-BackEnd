@@ -4,7 +4,12 @@ const SponsorController = {
     
   async create(req, res) {
     try {
-      const sponsor = await Sponsor.create(req.body);
+      // const sponsor = await Sponsor.create(req.body); //v.Jose
+      const sponsor = await Sponsor.create({
+        ...req.body,
+        imagen: req.file.filename 
+      });
+      
       res.status(201).send({ message: "Sponsor creado con exito", sponsor });
     } catch (error) {
       console.error(error);
