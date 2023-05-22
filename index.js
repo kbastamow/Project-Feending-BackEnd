@@ -6,6 +6,7 @@ const PORT = 8080;
 const { dbConnection } = require("./config/config");
 
 app.use(express.json());
+app.use(express.static("./uploads"))
 
 dbConnection();
 
