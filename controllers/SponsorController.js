@@ -50,8 +50,10 @@ const SponsorController = {
   async update(req, res) {
     try {
       const sponsor = await Sponsor.findByIdAndUpdate(
-        req.params._id,
-        req.body,
+        req.params._id,{
+        // req.body,
+        ...req.body,
+        imagen: req.file.filename },
         { new: true }
       );
       res.send({ message: "Sponsor actualizado con éxito", sponsor });

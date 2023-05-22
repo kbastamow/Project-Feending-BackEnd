@@ -4,7 +4,11 @@ const RecintoController = {
     
   async create(req, res) {
     try {
-      const recinto = await Recinto.create(req.body);
+      const recinto = await Recinto.create({
+        ...req.body,
+        imagenRecinto: req.file.filename ,       
+      
+      });
       res.status(201).send({ message: "Recinto creado con exito", recinto });
     } catch (error) {
       console.error(error);
@@ -45,8 +49,11 @@ const RecintoController = {
   async update(req, res) {
     try {
       const recinto = await Recinto.findByIdAndUpdate(
-        req.params._id,
-        req.body,
+        req.params._id,{
+        // req.body,
+        ...req.body,
+        imagenRecinto: req.file.filename} ,    
+     
         { new: true }
       );
       res.send({ message: "Recinto actualizado con éxito", recinto });

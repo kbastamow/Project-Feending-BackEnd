@@ -8,7 +8,7 @@ router.post('/create',upload.single('imagen'),UsuarioController.create)
 router.get('/getAllUsers',UsuarioController.getAll)
 router.get('/getById/:_id',UsuarioController.getById)
 router.delete('/delete/:_id',authentication,UsuarioController.delete)
-router.put('/update/:_id',authentication,UsuarioController.update)
+router.put('/update/:_id',authentication,upload.single('imagen'),UsuarioController.update)
 router.post('/login',UsuarioController.login)
 router.delete('/logout',authentication,UsuarioController.logout)
 
