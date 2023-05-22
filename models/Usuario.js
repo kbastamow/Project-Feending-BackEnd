@@ -4,8 +4,9 @@ const UsuarioSchema = new mongoose.Schema({
     nombre: String,
     email: String,
     password: String,
-    role: String,
+    role: {type: String, default:"usuario"},
     puesto: String,
+    empresa: String,
     imagen: String, //multer
     tokens: [],
 
