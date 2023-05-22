@@ -53,7 +53,7 @@ const SponsorController = {
         req.params._id,{
         // req.body,
         ...req.body,
-        imagen: req.file.filename },
+        imagen: req.file.filename},
         { new: true }
       );
       res.send({ message: "Sponsor actualizado con éxito", sponsor });
