@@ -4,11 +4,14 @@ const PORT = 8080;
 const cors = require('cors')
 
 const { dbConnection } = require('./config/config');
+const { handleTypeError } = require('./middlewares/errors');
 
 app.use(cors())
 app.use(express.json());
 
 dbConnection();
+
+app.use(handleTypeError)
 
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/sponsors', require('./routes/sponsors'));
