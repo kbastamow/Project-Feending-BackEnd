@@ -1,7 +1,8 @@
 const Usuario = require("../models/Usuario");
 const bcrypt = require ('bcryptjs');
 const jwt = require("jsonwebtoken");
-const { jwt_secret } = require("../config/keys.js");
+// const { jwt_secret } = require("../config/keys.js"); //esto ya no hace falta importarlo
+require("dotenv").config(); 
 
 const UsuarioController = {
   async create(req, res) {
@@ -22,7 +23,7 @@ const UsuarioController = {
       console.error(error);
     }
   },
-
+// AÑADIDA VARIABLE ENTORNO PARA jsw_token
   async login(req, res) {
     try {
       const usuario = await Usuario.findOne({
@@ -35,7 +36,8 @@ const UsuarioController = {
       if (!isMatch) {
         return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
       }
-      const token = jwt.sign({ _id: usuario._id }, jwt_secret);
+      // const token = jwt.sign({ _id: usuario._id }, jwt_secret);//Aqui importamos variable entorno
+      const token = jwt.sign({ _id: usuario._id }, process.env.JWT_SECRET);
       if (usuario.tokens.length > 4) usuario.tokens.shift;
       usuario.tokens.push(token);
       await usuario.save();

@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
-const PORT = 8080;
+// const PORT = 8080; // No se usa al incluirlo en la variable de entorno
 const cors = require('cors')
+require("dotenv").config(); // para poder usar dotenv
+const PORT = process.env.PORT || 3001; // .env config 3001 es un puerto ALTERNATIVO
 
-const { dbConnection } = require('./config/config');
+const { dbConnection } = require('./config/config'); 
 const { handleTypeError } = require('./middlewares/errors');
 
 app.use(cors())
