@@ -1,12 +1,11 @@
 const Usuario = require("../models/Usuario");
 const jwt = require("jsonwebtoken");
 require("dotenv").config(); //importado .dotenv para secretito
-// const { jwt_secret } = require("../config/keys.js"); //Ya no es necesario
+
 
 const authentication = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    // const payload = jwt.verify(token, jwt_secret); //sustituimos por la variable entorno con process.env(abajo)
     const payload = jwt.verify(token, process.env.JWT_SECRET); 
     const usuario = await Usuario.findOne({ _id: payload._id, tokens: token });
     if (!usuario) {
