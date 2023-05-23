@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 const EventoSchema = new mongoose.Schema({
     nombre: String,
     descripcion: String,
-    finicio: Date,
-    ffin: Date,
-    hinicio: Date,
-    hfin: Date,
+    inicio: Date,
+    fin: Date,
     direccion: {
         calle: String,
         localidad: String,

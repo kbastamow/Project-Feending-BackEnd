@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const ProgramacionSchema = new mongoose.Schema({
   dia: Number,
   actividad: String, 
-  inicio: Date,
-  fin: Date
+  inicio: String,
+  fin: String
 
   }, { timestamps: true }
 );
