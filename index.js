@@ -5,15 +5,12 @@ require("dotenv").config(); // para poder usar dotenv
 const PORT = process.env.PORT || 3001; // .env config 3001 es un puerto ALTERNATIVO
 
 const { dbConnection } = require('./config/config'); 
-const { handleTypeError } = require('./middlewares/errors');
 
 app.use(cors())
 app.use(express.json());
 app.use(express.static("./uploads"))
 
 dbConnection();
-
-app.use(handleTypeError)
 
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/sponsors', require('./routes/sponsors'));
