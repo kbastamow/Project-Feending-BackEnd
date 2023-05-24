@@ -4,6 +4,7 @@ const NotificacionSchema = new mongoose.Schema({
     idEvento: String,
     contenido: String,
     recurrente:  { type: Boolean, default: false },
+    categoria:  { type: String, default: "All" },
     dia: Date,
     hora: Date  
   }, { timestamps: true }

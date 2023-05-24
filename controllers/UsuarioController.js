@@ -33,7 +33,7 @@ const UsuarioController = {
       if (usuario.tokens.length > 4) usuario.tokens.shift;
       usuario.tokens.push(token);
       await usuario.save();
-      res.send({ msg: "Bienvenid@ " + usuario.nombre, token });
+      res.send({ msg: "Bienvenid@ " + usuario.nombre, token, usuario });
     } catch (error) {
       console.error(error);
       res.status(500).send({ msg: "Ha habido un error al loguearte", error });
