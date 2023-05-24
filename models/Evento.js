@@ -6,7 +6,7 @@ const EventoSchema = new mongoose.Schema({
     inicio: Date,
     fin: Date,
     direccion: {
-        calle: String,
+        lugar: String,
         localidad: String,
         provincia: String
     },
