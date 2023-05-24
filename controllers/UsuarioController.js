@@ -28,13 +28,7 @@ const UsuarioController = {
       const usuario = await Usuario.findOne({
         email: req.body.email,
       });
-      if (!usuario) {
-        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
-      }
-      const isMatch = await bcrypt.compare(req.body.password, usuario.password);
-      if (!isMatch) {
-        return res.status(400).send({ msg: "Correo o contraseña incorrectos" });
-      }
+
       const token = jwt.sign({ _id: usuario._id }, process.env.JWT_SECRET);
       if (usuario.tokens.length > 4) usuario.tokens.shift;
       usuario.tokens.push(token);
