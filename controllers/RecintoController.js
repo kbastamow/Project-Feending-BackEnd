@@ -4,12 +4,13 @@ const RecintoController = {
     
   async create(req, res) {
     try {
-      console.log(req.file)
-      const recinto = await Recinto.create({
-        ...req.body,
-        imagenRecinto: req.file.filename ,       
+      let data = req.body;
+      if(req.file){
+        data = {...req.body, imagenRecinto: req.file.filename}
       
-      });
+      }
+      console.log(req.file)
+      const recinto = await Recinto.create(data);
       res.status(201).send({ message: "Recinto creado con exito", recinto });
     } catch (error) {
       console.error(error);

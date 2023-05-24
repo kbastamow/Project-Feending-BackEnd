@@ -15,7 +15,7 @@ const RecintoSchema = new mongoose.Schema({
     zonaExterior: Boolean,
     zonaInterior: Boolean,
     salasPrivadas: Boolean,
-    imagenRecinto: String //multer
+    imagenRecinto: String
    
   }, { timestamps: true }
 );
