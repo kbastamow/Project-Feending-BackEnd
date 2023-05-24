@@ -4,6 +4,7 @@ const RecintoController = {
     
   async create(req, res) {
     try {
+      console.log(req.file)
       const recinto = await Recinto.create({
         ...req.body,
         imagenRecinto: req.file.filename ,       
