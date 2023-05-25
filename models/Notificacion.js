@@ -7,8 +7,7 @@ const NotificacionSchema = new mongoose.Schema({
     categoria:  { type: String, default: "All" },
     programada:  {type: Boolean, default: false},
     dia: Date,
-    hora: Date  
-  }, { timestamps: true }
+      }, { timestamps: true }
 );
 
 const Notificacion = mongoose.model("Notificacion", NotificacionSchema);
